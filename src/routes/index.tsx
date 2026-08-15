@@ -1,24 +1,36 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { TicTacToe } from "@/components/game/TicTacToe";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Tic-Tac-Toe — Play vs Friend or Minimax AI" },
+      {
+        name: "description",
+        content:
+          "Play Tic-Tac-Toe online: two-player mode or an unbeatable Minimax AI with easy, medium and hard difficulty, live scoreboard and stats.",
+      },
+      { property: "og:title", content: "Tic-Tac-Toe — Play vs Friend or Minimax AI" },
+      {
+        property: "og:description",
+        content:
+          "Classic strategy, modern experience. Player vs Player or Player vs AI with score tracking and statistics.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="relative min-h-screen overflow-hidden bg-background">
+      <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-x-mark/20 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-o-mark/20 blur-3xl" />
+      <div className="relative">
+        <TicTacToe />
+      </div>
+    </main>
   );
 }
