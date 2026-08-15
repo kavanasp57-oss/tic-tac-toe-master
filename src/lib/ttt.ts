@@ -58,7 +58,7 @@ function minimax(board: Board, current: Player, ai: Player, depth: number): { sc
 
 const randomMove = (board: Board): number => {
   const moves = availableMoves(board);
-  return moves[Math.floor(Math.random() * moves.length)];
+  return moves[Math.floor(Math.random() * moves.length)] ?? -1;
 };
 
 export function getAiMove(board: Board, ai: Player, difficulty: Difficulty): number {
